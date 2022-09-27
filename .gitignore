@@ -1,0 +1,8 @@
+# created by virtualenv automatically
+*.pytest_cache
+*__pycache__*
+lib/
+.Python
+coverage/
+.idea/
+bin/

@@ -6,3 +6,4 @@ lib/
 coverage/
 .idea/
 bin/
+.vscode

@@ -131,3 +131,15 @@ list_1 = ['Hi', 'ananas', 2, None, 75, 'pizza', 36, 100]
 # list_2 = [1, 2, 3, 4, 5]
 # print(list(map(lambda x: x*x, list_2)))
 # print([x*x for x in list_2])
+
+from utils import *
+
+arr1 = [1, 10, 5, 6, 3, 100]
+arr2 = [11, 10, 15, 16]
+
+print(sum_arrays(arr1, arr2))
+print(sum_arrays2(arr1, arr2))
+print(sum_arrays3(arr1, arr2))
+print(average(arr1))
+print(average(arr2))
+print(average([]))

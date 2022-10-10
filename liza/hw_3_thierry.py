@@ -17,10 +17,11 @@ def user_friendly_size(b):
     else:
         return f'{b} b'
 
+
 print(user_friendly_size(9999))
 print(user_friendly_size(9999999))
 print(user_friendly_size(955))
 print(user_friendly_size(9845610865445))
-print(user_friendly_size(os.path.getsize('/Users/liza/PycharmProjects/Python_Li_1/test_1.txt')))
-print(user_friendly_size(os.path.getsize('/Users/liza/Documents/Foto/Kotiki.jpg')))
-print(user_friendly_size(os.path.getsize('/Users/liza/Documents/Foto/avstrija-18/IMG_20180113_144440.jpg')))
+# print(user_friendly_size(os.path.getsize('/Users/liza/PycharmProjects/Python_Li_1/test_1.txt')))
+# print(user_friendly_size(os.path.getsize('/Users/liza/Documents/Foto/Kotiki.jpg')))
+# print(user_friendly_size(os.path.getsize('/Users/liza/Documents/Foto/avstrija-18/IMG_20180113_144440.jpg')))

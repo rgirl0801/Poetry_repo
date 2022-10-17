@@ -29,6 +29,7 @@
 
 # ВСТРОЕННЫЕ МОДУЛИ (BUILT-IN MODULES)
 from math import *
+
 # import math as m
 #
 # arr = [1, 2, 3, 4, 5, 10, 25]
@@ -53,7 +54,7 @@ from math import *
 #
 #
 # print('------Sum list_1 With function and for loop----------')
-list_1 = ['Hi', 'ananas', 2, None, 75, 'pizza', 36, 100]
+list_1 = ["Hi", "ananas", 2, None, 75, "pizza", 36, 100]
 # def filter_and_sum_nums(l):
 #     new_l = []
 #     for i in l:

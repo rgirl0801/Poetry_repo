@@ -1,6 +1,6 @@
 from selenium.webdriver.common.by import By
 
-from KateFox.pages_selen.base_page import BasePage
+from KateFox.pages.base_page import BasePage
 
 
 class DownloadsPage(BasePage):
@@ -12,11 +12,11 @@ class DownloadsPage(BasePage):
 
 
     def download_text_is_present(self):
-        assert self.element_is_present(self.DOWNLOAD_TXT)
+        assert self.wait_until_present(self.DOWNLOAD_TXT)
 
 
-    # def download_latest_version(self):
-    #     self.wait_until_clickable(self.DOWNLOAD_BTN).click()
+    def download_latest_version(self):
+        self.wait_until_clickable(self.DOWNLOAD_BTN).click()
 
 
     def go_to_documentation_page(self):

@@ -1,7 +1,6 @@
-from selenium.common.exceptions import NoSuchElementException
-from selenium.webdriver.common.by import By
 from typing import Tuple
 
+from selenium.common.exceptions import NoSuchElementException
 from selenium.common.exceptions import TimeoutException
 from selenium.webdriver import Chrome
 from selenium.webdriver.common.by import By
@@ -9,11 +8,11 @@ from selenium.webdriver.remote.webdriver import WebElement
 from selenium.webdriver.support import expected_conditions as ec
 from selenium.webdriver.support.wait import WebDriverWait
 
-from .locators import BasePageLocators
 
 
 class BasePage():
-    USER_ICON = (By.CSS_SELECTOR, '.icon-user')
+    HOME_BTN = (By.ID, 'selenium_logo')
+    ABOUT_BTN = (By.XPATH, '//li[2]/div[1]/a[1]')
 
     def __init__(self, browser: Chrome, url):
         self.browser = browser
@@ -28,9 +27,6 @@ class BasePage():
         except NoSuchElementException:
             return False
         return True
-
-
-
 
 
     def wait_for_url_to_be(self, url: str, timeout: int = 5) -> bool:
@@ -51,15 +47,12 @@ class BasePage():
     def wait_until_visible(self, locator: Tuple, timeout: int = 5):
         return WebDriverWait(self.browser, timeout).until(ec.visibility_of_element_located(locator))
 
-    # def element_is_present(self, locator: Tuple, timeout: int = 5) -> bool:
-    #     try:
-    #         self.wait_until_visible(locator, timeout)
-    #         return True
-    #     except TimeoutException:
-    #         return False
-
-    def logout(self):
-        self.wait_until_clickable(self.LOGOUT_BUTTON).click()
+    def element_is_present(self, locator: Tuple, timeout: int = 5) -> bool:
+        try:
+            self.wait_until_visible(locator, timeout)
+            return True
+        except TimeoutException:
+            return False
 
     def page_is_open(self, url):
         try:
@@ -67,6 +60,3 @@ class BasePage():
             return True
         except TimeoutException:
             return False
-
-
-

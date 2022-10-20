@@ -15,10 +15,10 @@ browser.get('https://www.selenium.dev/')
 #                          "//a[@href ='https://selenium.dev/documentation/en/grid/']").click()
 
 
-browser.find_element(By.CLASS_NAME, 'selenium-webdriver').click()
+r = browser.find_element(By.CSS_SELECTOR, '.display-1.mt-0').text
+print(r)
 
-
-time.sleep(2)
+time.sleep(5)
 
 
 browser.quit()

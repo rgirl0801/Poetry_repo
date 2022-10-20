@@ -11,6 +11,7 @@ from selenium.webdriver.support.wait import WebDriverWait
 class BasePage():
     HOME_BTN = (By.ID, 'selenium_logo')
     ABOUT_BTN = (By.XPATH, '//li[2]/div[1]/a[1]')
+    DOWNLOAD_BTN = (By.XPATH, "//a[@href ='/downloads']")
 
     def __init__(self, browser: Chrome, url):
         self.browser = browser
@@ -44,3 +45,6 @@ class BasePage():
             return True
         except TimeoutException:
             return False
+
+    def go_to_downolad_page(self):
+        self.wait_until_clickable(self.DOWNLOAD_BTN).click()

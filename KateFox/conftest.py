@@ -2,9 +2,6 @@ import pytest
 
 from selenium import webdriver
 
-from selenium.webdriver.chrome.service import Service
-from webdriver_manager.chrome import ChromeDriverManager
-
 
 @pytest.fixture()
 def browser():
@@ -14,11 +11,10 @@ def browser():
     yield browser
     browser.quit()
 
-# @pytest.fixture()
-# def url():
-#     """Фикстура для получения заданного из командной строки окружения"""
-#     # env = request.config.getoption("--env")
-#     url = 'https://www.selenium.dev/'
-#     if not url:
-#         raise Exception("Передано неверное окружение")
-#     return url
+
+@pytest.fixture()
+def url():
+    url = 'https://www.selenium.dev/'
+    if not url:
+        raise Exception("Wrong environment")
+    return url

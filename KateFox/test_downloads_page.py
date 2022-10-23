@@ -13,7 +13,7 @@ class TestDownloadsPageClass:
         self.downloads_page.open_page()
         self.downloads_page.download_latest_version()
 
-    def test_possibility_to_see_documentation(self, browser):
+    def test_possibility_to_see_documentation(self, browser, url):
         self.downloads_page.open_page()
         self.downloads_page.go_to_documentation_page()
         self.downloads_page.page_is_open(url)

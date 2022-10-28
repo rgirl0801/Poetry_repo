@@ -5,8 +5,7 @@ from KateFox.pages.base_page import BasePage
 
 class DownloadsPage(BasePage):
     DOWNLOAD_TXT = (By.CLASS_NAME, '.lead.mt-2.text-left')
-    DOWNLOAD_BTN = (By.XPATH,
-                    "//a[@href ='https://github.com/SeleniumHQ/selenium/releases/download/selenium-4.5.0/selenium-server-4.5.0.jar']")
+    DOWNLOAD_BTN = (By.XPATH, "//a[contains(@href,'https://github.com/SeleniumHQ/')]")
     DOCUMENTATION_BTN = (By.XPATH,
                          "//a[@href ='https://selenium.dev/documentation/en/grid/']")
 

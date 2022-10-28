@@ -7,9 +7,10 @@ from KateFox.pages.downloads_page import DownloadsPage
 class TestDownloadsPageClass:
     @pytest.fixture(autouse=True)
     def setup(self, browser, url):
-        self.downloads_page = DownloadsPage(browser, url + 'downloads/')
+        self.downloads_page = DownloadsPage(browser, url + 'downloads')
 
-    def test_download_latest_verion(self, browser):
+
+    def test_download_latest_verion(self):
         self.downloads_page.open_page()
         self.downloads_page.download_latest_version()
 

@@ -30,3 +30,6 @@ class TestMainPageClass:
     def test_go_to_downolad_page(self, browser):
         self.main_page.open_page()
         self.main_page.go_to_downolad_page()
+
+    def test_demo(self):
+        pass

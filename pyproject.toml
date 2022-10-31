@@ -6,6 +6,7 @@ authors = ["Kate <r_girl@inbox.ru>"]
 readme = "README.md"
 packages = [{include = "poetry_test"}]
 
+
 [tool.poetry.dependencies]
 python = "^3.10"
 black = "^22.8.0"

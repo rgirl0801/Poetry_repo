@@ -15,6 +15,7 @@ def browser():
     browser.quit()
 
 
+
 @pytest.fixture()
 def url():
     url = 'https://www.selenium.dev/'

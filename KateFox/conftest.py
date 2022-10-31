@@ -8,6 +8,9 @@ from webdriver_manager.chrome import ChromeDriverManager
 
 @pytest.fixture()
 def browser():
-    browser = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
+    options = webdriver.ChromeOptions()
+    options.add_argument("--window-size=1600,1080")
+    options.headless = False
+    browser = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
     yield browser
     browser.quit()

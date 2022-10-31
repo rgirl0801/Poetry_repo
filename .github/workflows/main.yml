@@ -1,32 +1,102 @@
-name: hedghog
-on: [push]
+Skip to content
+Search or jump to…
+Pull requests
+Issues
+Marketplace
+Explore
+ 
+@rgirl0801 
+Wis13
+/
+redRover
+Public
+Code
+Issues
+Pull requests
+1
+Actions
+Projects
+Security
+Insights
+redRover/.github/workflows/action.yml
+@Wis13
+Wis13 add action workflow
+Latest commit 5a9dee5 7 hours ago
+ History
+ 2 contributors
+@Wis13@akioikeda
+60 lines (50 sloc)  1.65 KB
+
+name: Saucedemo_05
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
 jobs:
-  hedhog:
+  build:
+
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.8", "3.8", "3.10"]
+
     steps:
-      - name: Check out this repo
-        uses: actions/checkout@v3
-      - name: install python
-        uses: actions/setup-python@v4
+    - uses: actions/checkout@v3
+      id: setup-python
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v3
+      with:
+        python-version: ${{ matrix.pythn-version }}
+
+    - name: Install poetry
+      uses: snok/install-poetry@v1
+      with:
+        virtualenvs-create: true
+        virtualenvs-in-project: true
+        installer-parallel: true
+ 
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        python -m pip install flake8 pytest black
+    - name: Load cached venv
+      id: cached-poetry-dependencies
+      uses: action/cache@v3
         with:
-          python-version: '3.10'
-      - name: install Chrome
-        uses: browser-actions/setup-chrome@latest
-      - uses: actions/checkout@v1
-      - uses: actions/setup-python@v1 
-      - run: |
-          pip install -U pip
-          pip install poetry
-          poetry install
-        env:
-          POETRY_VIRTUALENVS_CREATE: false   
-        
-      - name: Install poetry
-        run: curl -sSL https://install.python-poetry.org | python3 -
-        
-        
-        
-      - name: Install dependencies
-        run: poetry install
-      - name: Run the pytest
-        run: poetry run pytest -v
+          path: .venv
+          key: venv-${{ runner.os }}-${{ steps.setup-python.outputs.python-version }}-${{ hashFiles('**/poetry.lock') }}
+    
+    - name: Install poetry dependencies
+      if: steps.cached-poetry-dependencies.outputs.cache-hit != 'true'
+      run poetry install --no-interaction --no-root  
+    
+    - name: Lint with flake8
+      run: |
+        # stop the build if there are Python syntax errors or undefined names
+        flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
+        # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
+        flake8 . --count --exit-zero --max-complexity=10 --maxline-length=127 --stastistics
+    - name Run tests
+      run:
+        source .venv/bin/activate
+        pytest tests/
+        coverage report
+Footer
+© 2022 GitHub, Inc.
+Footer navigation
+Terms
+Privacy
+Security
+Status
+Docs
+Contact GitHub
+Pricing
+API
+Training
+Blog
+About
+redRover/action.yml at main · Wis13/redRover

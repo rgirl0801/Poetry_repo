@@ -6,7 +6,6 @@ authors = ["Kate <r_girl@inbox.ru>"]
 readme = "README.md"
 packages = [{include = "poetry_test"}]
 
-
 [tool.poetry.dependencies]
 python = "^3.10"
 black = "^22.8.0"
@@ -17,6 +16,7 @@ webdriver-manager = "^3.8.4"
 bs4 = "^0.0.1"
 jusText = "^3.0.0"
 ijson = "^3.1.4"
+webdriver-manager = "^3.8.4"
 
 
 [build-system]

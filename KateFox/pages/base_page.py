@@ -1,25 +1,50 @@
-from selenium.common.exceptions import NoSuchElementException
-from selenium.webdriver.common.by import By
+from typing import Tuple
 
-from .locators import BasePageLocators
+from selenium.common.exceptions import TimeoutException
+from selenium.webdriver import Chrome
+from selenium.webdriver.common.by import By
+from selenium.webdriver.remote.webdriver import WebElement
+from selenium.webdriver.support import expected_conditions as ec
+from selenium.webdriver.support.wait import WebDriverWait
 
 
 class BasePage():
-    USER_ICON = (By.CSS_SELECTOR, '.icon-user')
+    HOME_BTN = (By.ID, 'selenium_logo')
+    ABOUT_BTN = (By.XPATH, '//li[2]/div[1]/a[1]')
+    DOWNLOAD_BTN = (By.XPATH, "//a[@href ='/downloads']")
 
-    def __init__(self, browser, link):
+    def __init__(self, browser: Chrome, url):
         self.browser = browser
-        self.link = link
+        self.url = url
 
     def open_page(self):
-        self.browser.get(self.link)
+        self.browser.get(self.url)
 
-    def element_is_present(self, method, locator):
+
+    def wait_for_url_to_be(self, url: str, timeout: int = 5) -> bool:
+        return WebDriverWait(self.browser, timeout).until(ec.url_to_be(url))
+
+    def page_title_is(self, title: str, timeout: int = 5) -> bool:
+        return WebDriverWait(self.browser, timeout).until(ec.title_is(title))
+
+    def wait_until_clickable(self, locator: Tuple, timeout: int = 5) -> WebElement:
+        return WebDriverWait(self.browser, timeout).until(ec.element_to_be_clickable(locator))
+
+    def wait_until_present(self, locator: Tuple, timeout: int = 5) -> WebElement:
+        return WebDriverWait(self.browser, timeout).until(ec.presence_of_element_located(locator))
+
+    def wait_until_not_present(self, locator: Tuple, timeout=5) -> WebElement:
+        return WebDriverWait(self.browser, timeout).until_not(ec.presence_of_element_located(locator))
+
+    def wait_until_visible(self, locator: Tuple, timeout: int = 5):
+        return WebDriverWait(self.browser, timeout).until(ec.visibility_of_element_located(locator))
+
+    def page_is_open(self, url):
         try:
-            self.browser.find_element(method, locator)
-        except NoSuchElementException:
+            self.wait_for_url_to_be(url)
+            return True
+        except TimeoutException:
             return False
-        return True
 
-    def should_be_autorized_user(self):
-        assert self.element_is_present(*BasePageLocators.USER_ICON)
+    def go_to_downolad_page(self):
+        self.wait_until_clickable(self.DOWNLOAD_BTN).click()

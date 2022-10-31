@@ -1,9 +1,8 @@
 import pytest
 
 from selenium import webdriver
-
-from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
+from selenium.webdriver.chrome.service import Service
 
 
 @pytest.fixture()
@@ -14,3 +13,11 @@ def browser():
     browser = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
     yield browser
     browser.quit()
+
+
+@pytest.fixture()
+def url():
+    url = 'https://www.selenium.dev/'
+    if not url:
+        raise Exception("Wrong environment")
+    return url
